@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+
+.services-hero {
+    background: linear-gradient(to right, #1a365d, #2b6cb0);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.service-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.services-cta {
+    background: #1a365d;
+    color: white;
+    padding: 60px;
+    text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .service-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+<!-- HERO -->
+<section class="services-hero">
+    <div class="container">
+        <h1>Our Services</h1>
+        <p>Advanced Polyurea & Waterproofing Solutions</p>
+    </div>
+</section>
+
+<!-- MAIN SERVICE -->
+<section class="container section">
+
+    <h2 class="section-title centered">Polyurea Coating</h2>
+
+    <div class="service-detail">
+
+        <div class="service-text">
+            <p>
+                Polyurea coating is an advanced protective coating technology offering
+                superior durability, flexibility, and waterproofing. It is ideal for
+                industrial, commercial, and infrastructure applications.
+            </p>
+
+            <ul class="service-list">
+                <li>✔ High curing speed</li>
+                <li>✔ Works in high humidity & low temperatures</li>
+                <li>✔ Extreme abrasion resistance</li>
+                <li>✔ Impermeable waterproof membrane</li>
+                <li>✔ High thickness build-up</li>
+                <li>✔ Excellent chemical resistance</li>
+            </ul>
+        </div>
+
+        <div class="service-image">
+            <img src="{{ url_for('static', filename='images/img1.jpeg') }}">
+        </div>
+
+    </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section class="bg-light">
+    <div class="container section">
+        <h2 class="section-title centered">Applications</h2>
+
+        <div class="service-grid">
+
+            <div class="service-card">Roof Coatings</div>
+            <div class="service-card">Pipe Protection</div>
+            <div class="service-card">Tank Coatings</div>
+            <div class="service-card">Truck Bed Liners</div>
+            <div class="service-card">Freight Ship Liners</div>
+            <div class="service-card">Bulk Transport Wagons</div>
+            <div class="service-card">Conveyor Belts</div>
+            <div class="service-card">Car Parking Decks</div>
+            <div class="service-card">Bridges</div>
+            <div class="service-card">Offshore Applications</div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- BENEFITS -->
+<section class="bg-light">
+    <div class="container section">
+        <h2 class="section-title centered">Key Benefits</h2>
+
+        <div class="service-grid">
+
+            <div class="service-card">✔ Long Life Coating</div>
+            <div class="service-card">✔ High Productivity</div>
+            <div class="service-card">✔ Works in Extreme Temperatures</div>
+            <div class="service-card">✔ High Gloss Finish</div>
+            <div class="service-card">✔ Corrosion Resistant</div>
+            <div class="service-card">✔ Low Water Absorption</div>
+            <div class="service-card">✔ Seamless Coating</div>
+            <div class="service-card">✔ Eco-Friendly (Solvent Free)</div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="services-cta">
+    <div class="container centered">
+        <h2>Need Professional Coating Services?</h2>
+        <p>Contact us for expert solutions & site inspection</p>
+
+        <a href="/contact" class="btn-primary">Get Free Consultation</a>
+    </div>
+</section>
+
+{% endblock %}

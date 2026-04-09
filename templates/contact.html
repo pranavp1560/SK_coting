@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+
+.contact-hero {
+    background: linear-gradient(to right, #1a365d, #2b6cb0);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.contact-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .contact-grid,
+    .contact-main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+<!-- CONTACT HEADER -->
+<section class="contact-hero">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>Get in touch for waterproofing & coating solutions</p>
+    </div>
+</section>
+
+<!-- CONTACT CARDS -->
+<section class="contact-section">
+    <div class="container contact-grid">
+
+        <div class="contact-card">
+            <div class="icon-circle"><i class="fas fa-phone"></i></div>
+            <h3>Phone Number</h3>
+            <p>+91 9833561065</p>
+            <a href="tel:+919833561065" class="contact-btn">Call Us →</a>
+        </div>
+
+        <div class="contact-card">
+            <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+            <h3>Email Address</h3>
+            <p>sksolutions201@gmail.com</p>
+            <a href="mailto:sksolutions201@gmail.com" class="contact-btn">Email Us →</a>
+        </div>
+
+        <div class="contact-card">
+            <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+            <h3>Office Address</h3>
+            <p>Gami Industrial Estate,<br>Pawane MIDC, Navi Mumbai</p>
+            <a href="https://maps.google.com?q=Gami+Industrial+Estate+Pawane+MIDC+Navi+Mumbai"
+               target="_blank"
+               class="contact-btn">Direction →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- FORM + MAP -->
+<section class="contact-main">
+    <div class="container contact-main-grid">
+
+        <!-- FORM -->
+        <div class="contact-form-box">
+            <h2>Get Free Consultation</h2>
+
+            <form method="POST" action="/contact" class="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="text" name="phone" placeholder="Phone Number" required>
+                <textarea name="message" placeholder="Project Details"></textarea>
+                <button type="submit" class="btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <!-- MAP -->
+        <div class="contact-map">
+            <iframe 
+                src="https://www.google.com/maps?q=Gami+Industrial+Estate+Pawane+MIDC+Navi+Mumbai&output=embed"
+                width="100%" 
+                height="350" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+
+/* HERO */
+.about-hero {
+    background: linear-gradient(to right, #1a365d, #2b6cb0);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+/* GRID */
+.about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+/* STATS */
+.about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* WHY CHOOSE */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* EXPERTISE */
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.expertise-grid div {
+    background: #f7fafc;
+    padding: 20px;
+    border-left: 4px solid #2b6cb0;
+}
+
+/* CLIENT */
+.client-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* CTA */
+.about-cta {
+    background: #1a365d;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+    /* HERO */
+    .about-hero {
+        padding: 60px 15px;
+    }
+
+    .about-hero h1 {
+        font-size: 1.9rem;
+    }
+
+    /* ABOUT GRID */
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: left;   /* 🔥 keep professional alignment */
+    }
+
+    /* STATS → SIDE BY SIDE */
+    .about-stats {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .stat-card {
+        flex: 1;
+        padding: 15px;
+        text-align: center;
+    }
+
+    /* WHY CHOOSE → 2 COLUMNS */
+    .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    /* EXPERTISE → 2 COLUMNS */
+    .expertise-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .expertise-grid div {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    /* CLIENTS → 2 PER ROW */
+    .client-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        text-align: center;
+    }
+
+    /* CTA */
+    .about-cta {
+        padding: 50px 15px;
+    }
+
+    .about-cta h2 {
+        font-size: 1.5rem;
+    }
+
+    .about-cta .btn-primary {
+        width: auto;   /* ❌ not full width */
+    }
+}
+
+</style>
+<!-- HERO -->
+<section class="about-hero">
+    <div class="container">
+        <h1>About SK Coating Solutions</h1>
+        <p>Experts in Waterproofing & Advanced Polyurea Coating Solutions</p>
+    </div>
+</section>
+
+<!-- COMPANY INTRO -->
+<section class="container section">
+    <div class="about-grid">
+
+        <div>
+            <h2 class="section-title">Who We Are</h2>
+            <p>
+                SK Coating Solutions is a trusted name in waterproofing and protective coatings.
+                We specialize in advanced Polyurea coating systems that provide long-lasting
+                protection for industrial, commercial, and residential structures.
+            </p>
+
+            <p>
+                With strong expertise and modern equipment, we deliver high-quality,
+                fast-curing, and durable coating solutions across India and Gulf projects.
+            </p>
+        </div>
+
+        <div class="about-stats">
+            <div class="stat-card"><h3>10+</h3><p>Major Projects</p></div>
+            <div class="stat-card"><h3>100%</h3><p>Client Satisfaction</p></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="bg-light">
+    <div class="container section">
+        <h2 class="section-title centered">Why Choose Us</h2>
+
+        <div class="service-grid">
+
+            <div class="service-card">
+                <h3>Advanced Technology</h3>
+                <p>We use latest Polyurea coating systems for superior performance.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Fast Execution</h3>
+                <p>Quick curing solutions reduce downtime and increase efficiency.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Durability</h3>
+                <p>High resistance to chemicals, abrasion, and extreme weather.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- OUR EXPERTISE -->
+<section class="container section">
+    <h2 class="section-title centered">Our Expertise</h2>
+
+    <div class="expertise-grid">
+        <div>✔ Roof Waterproofing</div>
+        <div>✔ Industrial Coating</div>
+        <div>✔ Tank & Pipe Protection</div>
+        <div>✔ Bridge & Infrastructure Coating</div>
+        <div>✔ Offshore Applications</div>
+        <div>✔ Polyurea Spray Coating</div>
+    </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="bg-light">
+    <div class="container section">
+        <h2 class="section-title centered">Our Clients</h2>
+
+        <div class="client-list">
+            <span>Reliance DAICEC</span>
+            <span>L&T Seawoods</span>
+            <span>Siemens</span>
+            <span>JNPT Township</span>
+            <span>Thane Municipal Corp</span>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="about-cta">
+    <div class="container centered">
+        <h2>Ready to Protect Your Structure?</h2>
+        <p>Contact us today for expert coating solutions</p>
+
+        <a href="/contact" class="btn-primary">Get Free Consultation</a>
+    </div>
+</section>
+
+{% endblock %}

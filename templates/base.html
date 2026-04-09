@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SK Coating Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header>
+   <nav class="container nav-wrapper">
+
+    <!-- LOGO -->
+    <div class="logo">
+        <a href="/">
+            <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+        </a>
+    </div>
+
+    <!-- HAMBURGER -->
+    <div class="menu-toggle" id="menu-toggle">
+        ☰
+    </div>
+
+    <!-- MENU -->
+    <ul id="nav-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/contact" class="btn-nav">Contact</a></li>
+    </ul>
+
+</nav>
+</header>
+
+{% block content %}{% endblock %}
+<script>
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("nav-menu");
+
+    toggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+
+.projects-hero {
+    background: linear-gradient(to right, #1a365d, #2b6cb0);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.project-card {
+    background: #f7fafc;
+    padding: 20px;
+    border-left: 4px solid #2b6cb0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.projects-cta {
+    background: #1a365d;
+    color: white;
+    padding: 60px;
+    text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .projects-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+<!-- HERO -->
+<section class="projects-hero">
+    <div class="container">
+        <h1>Our Projects</h1>
+        <p>Trusted by Industry Leaders Across India & Gulf</p>
+    </div>
+</section>
+
+<!-- PROJECT LIST -->
+<section class="container section">
+    <h2 class="section-title centered">Major Clients & Projects</h2>
+
+    <div class="projects-grid">
+
+        <div class="project-card">TMC (Thane Municipal Corporation)</div>
+        <div class="project-card">JNPT Township (Uran) – TPO Membrane BASF</div>
+        <div class="project-card">L&T Seawoods – Grand Central Mall</div>
+        <div class="project-card">Reliance DAICEC BKC (Kurla)</div>
+        <div class="project-card">Chloride Metal (Pune)</div>
+        <div class="project-card">Sadguru Apartment (Terrace Coating)</div>
+        <div class="project-card">Panchashil EON Kharadi, Pune</div>
+        <div class="project-card">Siemens, Airoli, Navi Mumbai</div>
+        <div class="project-card">ISO Foam Insulation Kuwait (Gulf)</div>
+
+    </div>
+</section>
+
+
+
+<!-- STATS -->
+<section class="container section">
+    <h2 class="section-title centered">Our Impact</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card"><h3>10+</h3><p>Major Projects</p></div>
+        <div class="stat-card"><h3>50+</h3><p>Cities Covered</p></div>
+        <div class="stat-card"><h3>1+</h3><p>International Project</p></div>
+        <div class="stat-card"><h3>100%</h3><p>Client Satisfaction</p></div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="projects-cta">
+    <div class="container centered">
+        <h2>Want to Work With Us?</h2>
+        <p>We deliver high-performance coating solutions</p>
+
+        <a href="/contact" class="btn-primary">Get Free Consultation</a>
+    </div>
+</section>
+
+{% endblock %}
