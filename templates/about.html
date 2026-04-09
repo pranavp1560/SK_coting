@@ -1,235 +1,330 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - SK Coating Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-{% block content %}
-<style>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --light-bg: #f8fafc;
+            --text: #334155;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
 
-/* HERO */
-.about-hero {
-    background: linear-gradient(to right, #1a365d, #2b6cb0);
-    color: white;
-    text-align: center;
-    padding: 80px 20px;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* GRID */
-.about-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 40px;
-    align-items: center;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white); /* Changed to white for seamless full-screen */
+            color: var(--text);
+            line-height: 1.6;
+        }
 
-/* STATS */
-.about-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+        /* --- REMOVED MAX-WIDTH FOR FULL SCREEN --- */
+        .main {
+            width: 100%;
+            margin: 0;
+            background: var(--white);
+        }
 
-/* WHY CHOOSE */
-.service-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
+        /* Standard Container for Internal Content Alignment */
+        .container {
+            max-width: 1400px; /* Allows content to breathe but keeps it readable */
+            margin: 0 auto;
+            padding: 0 40px;
+        }
 
-/* EXPERTISE */
-.expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%; /* Percentage padding for fluid width */
+            background: var(--white);
+            border-bottom: 3px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-.expertise-grid div {
-    background: #f7fafc;
-    padding: 20px;
-    border-left: 4px solid #2b6cb0;
-}
+        .logo img { height: 50px; display: block; }
 
-/* CLIENT */
-.client-list {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+        .menu { display: flex; gap: 40px; }
+        .menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .menu a:hover { color: var(--secondary); }
 
-/* CTA */
-.about-cta {
-    background: #1a365d;
-    color: white;
-    padding: 60px 20px;
-    text-align: center;
-}
+        .menu-toggle { display: none; font-size: 24px; cursor: pointer; color: var(--primary); }
 
-/* 📱 MOBILE */
-@media (max-width: 768px) {
+        /* --- HERO (Full Width) --- */
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.75), rgba(26, 54, 93, 0.75)), 
+                        url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            width: 100%;
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 15px; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; font-weight: 300; }
 
-    /* HERO */
-    .about-hero {
-        padding: 60px 15px;
-    }
+        /* --- SECTIONS --- */
+        .section { padding: 100px 0; }
+        
+        .section-title { 
+            color: var(--primary); 
+            font-size: 2.5rem; 
+            margin-bottom: 30px; 
+            display: inline-block;
+            position: relative;
+        }
+        .section-title::after {
+            content: ''; position: absolute; left: 0; bottom: -5px;
+            width: 80px; height: 4px; background: var(--secondary);
+        }
 
-    .about-hero h1 {
-        font-size: 1.9rem;
-    }
+        /* --- ABOUT CONTENT --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 80px; /* Increased gap for wide screens */
+            align-items: flex-start;
+        }
 
-    /* ABOUT GRID */
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        text-align: left;   /* 🔥 keep professional alignment */
-    }
+        .stats { display: flex; flex-direction: column; gap: 30px; }
 
-    /* STATS → SIDE BY SIDE */
-    .about-stats {
-        flex-direction: row;
-        justify-content: space-between;
-    }
+        .stat-card {
+            background: var(--light-bg);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 8px solid var(--secondary);
+            transition: var(--transition);
+        }
+        .stat-card:hover { transform: translateX(15px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .stat-card b { font-size: 2.5rem; color: var(--primary); display: block; }
+        .stat-card span { font-size: 1.1rem; color: #64748b; font-weight: 500; }
 
-    .stat-card {
-        flex: 1;
-        padding: 15px;
-        text-align: center;
-    }
+        /* --- WHY CHOOSE US (Full Width Row) --- */
+        .bg-light { background: var(--light-bg); width: 100%; }
+        .centered { text-align: center; }
+        .centered .section-title::after { left: 50%; transform: translateX(-50%); }
 
-    /* WHY CHOOSE → 2 COLUMNS */
-    .service-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
 
-    /* EXPERTISE → 2 COLUMNS */
-    .expertise-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
+        /* --- EXPERTISE --- */
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .exp-card {
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        .exp-card:hover { background: var(--secondary); transform: scale(1.02); }
 
-    .expertise-grid div {
-        padding: 15px;
-        font-size: 14px;
-    }
+        /* --- CLIENTS --- */
+        .clients-flex {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 50px;
+            padding: 40px 0;
+        }
+        .client-name {
+            font-weight: 800;
+            color: #cbd5e1;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
 
-    /* CLIENTS → 2 PER ROW */
-    .client-list {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        text-align: center;
-    }
+        /* --- CTA --- */
+        .cta { background: var(--primary); color: white; text-align: center; padding: 100px 20px; width: 100%; }
+        .btn {
+            background: var(--secondary);
+            color: white;
+            padding: 18px 50px;
+            display: inline-block;
+            margin-top: 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+        .btn:hover { background: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
-    /* CTA */
-    .about-cta {
-        padding: 50px 15px;
-    }
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .navbar { padding: 15px 20px; }
+            .menu-toggle { display: block; }
+            .menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; width: 100%;
+                background: white; padding: 20px;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+            .menu.active { display: flex; }
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid, .why-grid, .exp-grid { grid-template-columns: 1fr; }
+            .section { padding: 60px 20px; }
+        }
+    </style>
+</head>
 
-    .about-cta h2 {
-        font-size: 1.5rem;
-    }
+<body>
 
-    .about-cta .btn-primary {
-        width: auto;   /* ❌ not full width */
-    }
-}
+<div class="main">
 
-</style>
-<!-- HERO -->
-<section class="about-hero">
+    <nav class="navbar">
+        <div class="logo">
+        <a href="/">
+            <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+        </a>
+    </div>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <div class="menu" id="nav-links">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
+            <a href="/projects">Projects</a>
+            <a href="/contact" class="btn-nav">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>About SK Coating Solutions</h1>
+            <p>Industry Leaders in Protective Coating & Waterproofing Technology</p>
+        </div>
+    </header>
+
     <div class="container">
-        <h1>About SK Coating Solutions</h1>
-        <p>Experts in Waterproofing & Advanced Polyurea Coating Solutions</p>
-    </div>
-</section>
+        <section class="section">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 class="section-title">Who We Are</h2>
+                    <p style="font-size: 1.15rem;">SK Coating Solutions is a premier service provider specializing in <b>Polyurea Spray Coating</b> and <b>Waterproofing Excellence</b>. With over a decade of industry expertise, we deliver high-performance protective layers that ensure structural longevity.</p>
+                    <br>
+                    <p style="font-size: 1.15rem;">Based in Navi Mumbai, we serve a prestigious clientele with a commitment to quality standards like NACE, ASTM, and SSPC. Our team is dedicated to providing technological advancements that outlast conventional materials.</p>
+                </div>
 
-<!-- COMPANY INTRO -->
-<section class="container section">
-    <div class="about-grid">
-
-        <div>
-            <h2 class="section-title">Who We Are</h2>
-            <p>
-                SK Coating Solutions is a trusted name in waterproofing and protective coatings.
-                We specialize in advanced Polyurea coating systems that provide long-lasting
-                protection for industrial, commercial, and residential structures.
-            </p>
-
-            <p>
-                With strong expertise and modern equipment, we deliver high-quality,
-                fast-curing, and durable coating solutions across India and Gulf projects.
-            </p>
-        </div>
-
-        <div class="about-stats">
-            <div class="stat-card"><h3>10+</h3><p>Major Projects</p></div>
-            <div class="stat-card"><h3>100%</h3><p>Client Satisfaction</p></div>
-        </div>
-
-    </div>
-</section>
-
-<!-- WHY CHOOSE US -->
-<section class="bg-light">
-    <div class="container section">
-        <h2 class="section-title centered">Why Choose Us</h2>
-
-        <div class="service-grid">
-
-            <div class="service-card">
-                <h3>Advanced Technology</h3>
-                <p>We use latest Polyurea coating systems for superior performance.</p>
+                <div class="stats">
+                    <div class="stat-card">
+                        <b>10+</b>
+                        <span>Industrial Projects Completed</span>
+                    </div>
+                    <div class="stat-card">
+                        <b>100%</b>
+                        <span>Client Satisfaction Guarantee</span>
+                    </div>
+                </div>
             </div>
+        </section>
+    </div>
 
-            <div class="service-card">
-                <h3>Fast Execution</h3>
-                <p>Quick curing solutions reduce downtime and increase efficiency.</p>
+    <section class="section bg-light">
+        <div class="container">
+            <div class="centered"><h2 class="section-title">Why Choose Us</h2></div>
+            <div class="why-grid">
+                <div class="stat-card centered">
+                    <i class="fas fa-microchip" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"></i>
+                    <br><b>Advanced Technology</b>
+                    <p style="margin-top: 15px;">Utilizing pure Polyurea spray systems that cure in seconds for ultimate protection.</p>
+                </div>
+                <div class="stat-card centered">
+                    <i class="fas fa-bolt" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"></i>
+                    <br><b>Fast Execution</b>
+                    <p style="margin-top: 15px;">Efficient application processes designed to minimize downtime for active facilities.</p>
+                </div>
+                <div class="stat-card centered">
+                    <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"></i>
+                    <br><b>Extreme Durability</b>
+                    <p style="margin-top: 15px;">High-build membranes that resist abrasion, chemicals, and extreme weather.</p>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="service-card">
-                <h3>Durability</h3>
-                <p>High resistance to chemicals, abrasion, and extreme weather.</p>
+    <div class="container">
+        <section class="section">
+            <div class="centered"><h2 class="section-title">Our Expertise</h2></div>
+            <div class="exp-grid">
+                <div class="exp-card">Commercial Roofing</div>
+                <div class="exp-card">Pipeline Internal/External</div>
+                <div class="exp-card">Primary/Secondary Tanks</div>
+                <div class="exp-card">Infrastructure & Bridges</div>
+                <div class="exp-card">Marine & Offshore</div>
+                <div class="exp-card">Automotive Truck Liners</div>
             </div>
+        </section>
 
+        <section class="section">
+            <div class="centered"><h2 class="section-title">Trusted By</h2></div>
+            <div class="clients-flex">
+                <div class="client-name">Reliance</div>
+                <div class="client-name">L&T</div>
+                <div class="client-name">Siemens</div>
+                <div class="client-name">JNPT</div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="cta">
+        <div class="container">
+            <h2>Ready to Secure Your Assets?</h2>
+            <p>Our engineering team is ready to assist you with a professional site assessment.</p>
+            <a href="contact.html" class="btn">Get Started Now</a>
         </div>
-    </div>
-</section>
+    </footer>
 
-<!-- OUR EXPERTISE -->
-<section class="container section">
-    <h2 class="section-title centered">Our Expertise</h2>
+</div>
 
-    <div class="expertise-grid">
-        <div>✔ Roof Waterproofing</div>
-        <div>✔ Industrial Coating</div>
-        <div>✔ Tank & Pipe Protection</div>
-        <div>✔ Bridge & Infrastructure Coating</div>
-        <div>✔ Offshore Applications</div>
-        <div>✔ Polyurea Spray Coating</div>
-    </div>
-</section>
+<script>
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
 
-<!-- CLIENTS -->
-<section class="bg-light">
-    <div class="container section">
-        <h2 class="section-title centered">Our Clients</h2>
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+</script>
 
-        <div class="client-list">
-            <span>Reliance DAICEC</span>
-            <span>L&T Seawoods</span>
-            <span>Siemens</span>
-            <span>JNPT Township</span>
-            <span>Thane Municipal Corp</span>
-        </div>
-    </div>
-</section>
-
-<!-- CTA -->
-<section class="about-cta">
-    <div class="container centered">
-        <h2>Ready to Protect Your Structure?</h2>
-        <p>Contact us today for expert coating solutions</p>
-
-        <a href="/contact" class="btn-primary">Get Free Consultation</a>
-    </div>
-</section>
-
-{% endblock %}
+</body>
+</html>
