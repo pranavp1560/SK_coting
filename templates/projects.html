@@ -1,98 +1,265 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - SK Coating Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --accent: #63b3ed;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --text: #334155;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
 
-{% block content %}
-<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-.projects-hero {
-    background: linear-gradient(to right, #1a365d, #2b6cb0);
-    color: white;
-    text-align: center;
-    padding: 80px 20px;
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 80px 0; }
+        .centered { text-align: center; }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: var(--white);
+            border-bottom: 3px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; text-transform: uppercase; }
+        .logo span { color: var(--secondary); }
+
+        .menu { display: flex; gap: 30px; }
+        .menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .menu a:hover { color: var(--secondary); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* --- HERO SECTION --- */
+        .projects-hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.85)), 
+                        url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .projects-hero h1 { font-size: 3rem; margin-bottom: 10px; }
+        .projects-hero p { font-size: 1.2rem; opacity: 0.9; font-weight: 300; }
+
+        /* --- PROJECT GRID --- */
+        .section-title { font-size: 2.2rem; color: var(--primary); margin-bottom: 40px; position: relative; }
+        .section-title.centered::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 4px; background: var(--secondary);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary);
+            font-weight: 600;
+            color: var(--primary);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .project-card:hover {
+            background: var(--white);
+            transform: scale(1.03);
+            box-shadow: var(--shadow);
+            color: var(--secondary);
+        }
+
+        /* --- STATS GRID --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 40px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid #edf2f7;
+        }
+
+        .stat-card h3 { font-size: 2.5rem; color: var(--secondary); margin-bottom: 5px; }
+        .stat-card p { font-weight: 600; color: #718096; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+
+        /* --- CTA --- */
+        .projects-cta {
+            background: var(--primary);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 25px;
+            transition: var(--transition);
+        }
+        .btn-primary:hover { background: var(--accent); transform: scale(1.05); }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .menu-toggle { display: block; }
+            .menu {
+                display: none; flex-direction: column; position: absolute;
+                top: 100%; left: 0; width: 100%; background: white;
+                padding: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+            .menu.active { display: flex; }
+            .menu a { padding: 12px 0; border-bottom: 1px solid #f1f1f1; width: 100%; }
+
+            .projects-hero h1 { font-size: 2.2rem; }
+            
+            /* Stacks into 1 column for Mobile per request */
+            .projects-grid, .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .section { padding: 60px 0; }
+        }
+                .logo img {
+    height: 50px;
 }
 
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.project-card {
-    background: #f7fafc;
-    padding: 20px;
-    border-left: 4px solid #2b6cb0;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.projects-cta {
-    background: #1a365d;
-    color: white;
-    padding: 60px;
-    text-align: center;
-}
-
-/* MOBILE */
 @media (max-width: 768px) {
-    .projects-grid,
-    .stats-grid {
-        grid-template-columns: 1fr;
+    .logo img {
+        height: 40px;
     }
 }
+    </style>
+</head>
+<body>
 
-</style>
-<!-- HERO -->
-<section class="projects-hero">
-    <div class="container">
-        <h1>Our Projects</h1>
-        <p>Trusted by Industry Leaders Across India & Gulf</p>
+    <div class="navbar">
+        <div class="logo">
+        <a href="/">
+            <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+        </a>
     </div>
-</section>
-
-<!-- PROJECT LIST -->
-<section class="container section">
-    <h2 class="section-title centered">Major Clients & Projects</h2>
-
-    <div class="projects-grid">
-
-        <div class="project-card">TMC (Thane Municipal Corporation)</div>
-        <div class="project-card">JNPT Township (Uran) – TPO Membrane BASF</div>
-        <div class="project-card">L&T Seawoods – Grand Central Mall</div>
-        <div class="project-card">Reliance DAICEC BKC (Kurla)</div>
-        <div class="project-card">Chloride Metal (Pune)</div>
-        <div class="project-card">Sadguru Apartment (Terrace Coating)</div>
-        <div class="project-card">Panchashil EON Kharadi, Pune</div>
-        <div class="project-card">Siemens, Airoli, Navi Mumbai</div>
-        <div class="project-card">ISO Foam Insulation Kuwait (Gulf)</div>
-
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="menu" id="nav-links">
+             <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
+            <a href="/projects">Projects</a>
+            <a href="/contact" class="btn-nav">Contact</a>
+        </div>
     </div>
-</section>
 
+    <header class="projects-hero">
+        <div class="container">
+            <h1>Our Portfolio</h1>
+            <p>Proven Waterproofing & Coating Excellence Across Key Landmarks</p>
+        </div>
+    </header>
 
+    <section class="container section">
+        <h2 class="section-title centered">Major Clients & Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">TMC (Thane Municipal Corporation)</div>
+            <div class="project-card">JNPT Township (Uran) – TPO Membrane BASF</div>
+            <div class="project-card">L&T Seawoods – Grand Central Mall</div>
+            <div class="project-card">Reliance DAICEC BKC (Kurla)</div>
+            <div class="project-card">Chloride Metal (Pune)</div>
+            <div class="project-card">Sadguru Apartment (Terrace Coating)</div>
+            <div class="project-card">Panchashil EON Kharadi, Pune</div>
+            <div class="project-card">Siemens, Airoli, Navi Mumbai</div>
+            <div class="project-card">ISO Foam Insulation Kuwait (Gulf)</div>
+        </div>
+    </section>
 
-<!-- STATS -->
-<section class="container section">
-    <h2 class="section-title centered">Our Impact</h2>
+    <section class="bg-light section" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title centered">Our Industry Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card"><h3>10+</h3><p>Major Projects</p></div>
+                <div class="stat-card"><h3>50+</h3><p>Cities Covered</p></div>
+                <div class="stat-card"><h3>1+</h3><p>International Project</p></div>
+                <div class="stat-card"><h3>100%</h3><p>Client Satisfaction</p></div>
+            </div>
+        </div>
+    </section>
 
-    <div class="stats-grid">
-        <div class="stat-card"><h3>10+</h3><p>Major Projects</p></div>
-        <div class="stat-card"><h3>50+</h3><p>Cities Covered</p></div>
-        <div class="stat-card"><h3>1+</h3><p>International Project</p></div>
-        <div class="stat-card"><h3>100%</h3><p>Client Satisfaction</p></div>
-    </div>
-</section>
+    <section class="projects-cta">
+        <div class="container">
+            <h2>Partner With Excellence</h2>
+            <p>Let’s discuss how our coating solutions can protect your next project.</p>
+            <a href="/contact" class="btn-primary">Get a Free Consultation</a>
+        </div>
+    </section>
 
-<!-- CTA -->
-<section class="projects-cta">
-    <div class="container centered">
-        <h2>Want to Work With Us?</h2>
-        <p>We deliver high-performance coating solutions</p>
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
 
-        <a href="/contact" class="btn-primary">Get Free Consultation</a>
-    </div>
-</section>
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
 
-{% endblock %}
+</body>
+</html>
